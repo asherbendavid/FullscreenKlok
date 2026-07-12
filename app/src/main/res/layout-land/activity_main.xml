@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:clickable="false"
+    android:focusable="false">
+
+    <LinearLayout
+        android:id="@+id/blockContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:clickable="false"
+        android:focusable="false"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:clickable="false"
+            android:focusable="false">
+
+            <TextView
+                android:id="@+id/timeText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00:00:00"
+                android:textColor="@color/white"
+                android:textSize="72sp"
+                android:fontFamily="sans-serif"
+                android:clickable="false"
+                android:focusable="false" />
+
+            <TextView
+                android:id="@+id/dateText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sun 12 Jul"
+                android:textColor="@color/white"
+                android:textSize="28sp"
+                android:fontFamily="sans-serif-light"
+                android:layout_marginTop="4dp"
+                android:clickable="false"
+                android:focusable="false" />
+
+        </LinearLayout>
+
+        <!-- Fixed box sized to the POST-rotation footprint (32 wide x 64 tall)
+             so the rotated battery icon doesn't get clipped by its siblings -->
+        <FrameLayout
+            android:layout_width="32dp"
+            android:layout_height="64dp"
+            android:layout_marginStart="28dp"
+            android:clickable="false"
+            android:focusable="false">
+
+            <cvc.dashingdog.fullscreenklok.BatteryView
+                android:id="@+id/batteryView"
+                android:layout_width="64dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center"
+                android:rotation="-90"
+                android:clickable="false"
+                android:focusable="false" />
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

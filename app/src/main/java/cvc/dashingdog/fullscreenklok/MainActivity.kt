@@ -116,7 +116,7 @@ class MainActivity : AppCompatActivity() {
         tickHandler.removeCallbacks(tickRunnable)
         try {
             unregisterReceiver(batteryReceiver)
-        } catch (e: IllegalArgumentException) {
+        } catch ( _ : IllegalArgumentException) {
             // not registered -- safe to ignore
         }
     }

@@ -57,6 +57,7 @@
         <!-- Fixed box sized to the POST-rotation footprint (32 wide x 64 tall)
              so the rotated battery icon doesn't get clipped by its siblings -->
         <FrameLayout
+            android:id="@+id/batteryWrapper"
             android:layout_width="32dp"
             android:layout_height="64dp"
             android:layout_marginStart="28dp"

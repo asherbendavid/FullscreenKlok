@@ -24,7 +24,8 @@ class SettingsActivity : AppCompatActivity() {
     private lateinit var secondsSwitch: Switch
     private var previewBatteryWrapper: View? = null
     private lateinit var rotationLockSwitch: Switch
-    private lateinit var rotationLockRow: View
+    private lateinit var landscapeNote: TextView
+    private lateinit var portraitOnlySettings: View
 
     private val scaleKey: String
         get() = if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE)
@@ -90,9 +91,12 @@ class SettingsActivity : AppCompatActivity() {
             prefs.edit().putBoolean(Prefs.KEY_IGNORE_ROTATION_LOCK, checked).apply()
         }
 
-        rotationLockRow = findViewById(R.id.rotationLockRow)
-        rotationLockRow.visibility = if (resources.configuration.orientation ==
-            Configuration.ORIENTATION_LANDSCAPE) View.GONE else View.VISIBLE
+        landscapeNote = findViewById(R.id.landscapeNote)
+        portraitOnlySettings = findViewById(R.id.portraitOnlySettings)
+
+        val isLandscape = resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
+        landscapeNote.visibility = if (isLandscape) View.VISIBLE else View.GONE
+        portraitOnlySettings.visibility = if(isLandscape) View.GONE else View.VISIBLE
     }
 
     private fun loadAndApply() {

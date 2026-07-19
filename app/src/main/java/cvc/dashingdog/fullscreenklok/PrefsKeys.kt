@@ -9,7 +9,7 @@ object Prefs {
     const val KEY_SHOW_SECONDS = "show_seconds"
     const val KEY_IGNORE_ROTATION_LOCK = "ignore_rotation_lock"
     const val SCALE_MIN = 0.6f
-    const val SCALE_MAX = 3.0f
+    const val SCALE_MAX = 3.5f
     const val SCALE_STEP = 0.1f
     const val SCALE_DEFAULT = 1.0f
 }

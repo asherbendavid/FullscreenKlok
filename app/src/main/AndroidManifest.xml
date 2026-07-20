@@ -30,6 +30,19 @@
             android:exported="false"
             android:label="@string/shortcut_settings_short"
             android:theme="@style/Theme.FullscreenKlok" />
+        <service
+            android:name=".KlokDreamService"
+            android:exported="true"
+            android:label="Fullscreen Klok"
+            android:permission="android.permission.BIND_DREAM_SERVICE">
+            <intent-filter>
+                <action android:name="android.service.dreams.DreamService" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data
+                android:name="android.service.dream"
+                android:resource="@xml/dream_info" />
+        </service>
     </application>
 
 </manifest>

@@ -16,6 +16,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import java.text.SimpleDateFormat
 import java.util.Locale
+import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
 
@@ -180,6 +181,14 @@ class MainActivity : AppCompatActivity() {
             }
             wrapper.requestLayout()
         }
+
+        val shiftEnabled = prefs.getBoolean(Prefs.KEY_SHIFT_MAIN_DISPLAY, false)
+        tickHandler.removeCallbacks(shiftRunnable) // always clear first, avoid stacking duplicate loops
+        if (shiftEnabled) {
+            tickHandler.post(shiftRunnable)
+        } else {
+            findViewById<View>(R.id.blockContainer).animate().translationX(0f).translationY(0f).setDuration(300).start()
+        }
     }
 
     private fun applyOrientationSetting() {
@@ -188,6 +197,19 @@ class MainActivity : AppCompatActivity() {
             android.content.pm.ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR
         } else {
             android.content.pm.ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
+        }
+    }
+
+    private val shiftRunnable = object : Runnable {
+        override fun run() {
+            val dx = Random.nextFloat() * Prefs.SHIFT_MAX_PX * 2 - Prefs.SHIFT_MAX_PX
+            val dy = Random.nextFloat() * Prefs.SHIFT_MAX_PX * 2 - Prefs.SHIFT_MAX_PX
+            findViewById<View>(R.id.blockContainer).animate()
+                .translationX(dx)
+                .translationY(dy)
+                .setDuration(2000)
+                .start()
+            tickHandler.postDelayed(this, Prefs.SHIFT_INTERVAL_MS)
         }
     }
 }

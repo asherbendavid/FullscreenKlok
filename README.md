@@ -48,9 +48,11 @@ ever want a variant, easiest path is duplicating this project rather than
 adding settings — keeps it single-purpose per your "arrived at what I want"
 philosophy.
 
-## Open question for you
-
-Battery colour thresholds (green >50%, amber 20–50%, red <20%) and the
-charging pulse are my best recall of Vaart's status styling — flag it if
-you want different cutoffs or no pulse at all, trivial to change in
-`BatteryView.kt`.
+### Burn-in prevention
+- Screen saver mode always shifts the display slightly (±24px, every
+  5 minutes) to reduce AMOLED burn-in risk during long overnight
+  sessions.
+- The same shift can optionally be enabled on the normal display too,
+  via Settings > "Shift display to prevent burn-in". When enabled,
+  the Settings screen shows an orange guide border indicating the
+  margin to leave around your content.

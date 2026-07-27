@@ -5,6 +5,7 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.FrameLayout
 import android.widget.Switch
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -26,6 +27,8 @@ class SettingsActivity : AppCompatActivity() {
     private lateinit var rotationLockSwitch: Switch
     private lateinit var landscapeNote: TextView
     private lateinit var portraitOnlySettings: View
+    private lateinit var shiftSwitch: Switch
+    private lateinit var shiftMarginBox: View
 
     private val scaleKey: String
         get() = if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE)
@@ -97,6 +100,20 @@ class SettingsActivity : AppCompatActivity() {
         val isLandscape = resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
         landscapeNote.visibility = if (isLandscape) View.VISIBLE else View.GONE
         portraitOnlySettings.visibility = if(isLandscape) View.GONE else View.VISIBLE
+
+        shiftSwitch = findViewById(R.id.shiftSwitch)
+        shiftMarginBox = findViewById(R.id.shiftMarginBox)
+
+        val marginPx = Prefs.SHIFT_MAX_PX.toInt()
+        (shiftMarginBox.layoutParams as FrameLayout.LayoutParams).apply {
+            setMargins(marginPx, marginPx, marginPx, marginPx)
+        }
+        shiftMarginBox.requestLayout()
+
+        shiftSwitch.setOnCheckedChangeListener { _, checked ->
+            prefs.edit().putBoolean(Prefs.KEY_SHIFT_MAIN_DISPLAY, checked).apply()
+            shiftMarginBox.visibility = if (checked) View.VISIBLE else View.GONE
+        }
     }
 
     private fun loadAndApply() {
@@ -106,6 +123,8 @@ class SettingsActivity : AppCompatActivity() {
         secondsSwitch.isChecked = prefs.getBoolean(Prefs.KEY_SHOW_SECONDS, true)
         rotationLockSwitch.isChecked = prefs.getBoolean(Prefs.KEY_IGNORE_ROTATION_LOCK, false)
         previewBattery.setBatteryState(72, false)
+        shiftSwitch.isChecked = prefs.getBoolean(Prefs.KEY_SHIFT_MAIN_DISPLAY, false)
+        shiftMarginBox.visibility = if (shiftSwitch.isChecked) View.VISIBLE else View.GONE
         applyPreview()
     }
 

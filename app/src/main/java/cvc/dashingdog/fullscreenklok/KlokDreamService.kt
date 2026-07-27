@@ -37,7 +37,7 @@ class KlokDreamService : DreamService() {
     private val shiftRunnable = object : Runnable {
         override fun run() {
             shiftContainer()
-            handler.postDelayed(this, 5 * 60_000) // every 5 minutes
+            handler.postDelayed(this, Prefs.SHIFT_INTERVAL_MS) // every 5 minutes
         }
     }
 
@@ -92,7 +92,7 @@ class KlokDreamService : DreamService() {
     }
 
     private fun shiftContainer() {
-        val maxOffsetPx = 24f // small enough to stay unnoticed, enough to matter for burn-in
+        val maxOffsetPx = Prefs.SHIFT_MAX_PX // small enough to stay unnoticed, enough to matter for burn-in
         val dx = Random.nextFloat() * maxOffsetPx * 2 - maxOffsetPx
         val dy = Random.nextFloat() * maxOffsetPx * 2 - maxOffsetPx
         blockContainer.animate()

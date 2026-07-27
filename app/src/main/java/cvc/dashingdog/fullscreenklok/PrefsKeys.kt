@@ -8,6 +8,9 @@ object Prefs {
     const val KEY_SHOW_DATE = "show_date"
     const val KEY_SHOW_SECONDS = "show_seconds"
     const val KEY_IGNORE_ROTATION_LOCK = "ignore_rotation_lock"
+    const val KEY_SHIFT_MAIN_DISPLAY = "shift_main_display"
+    const val SHIFT_MAX_PX = 24F
+    const val SHIFT_INTERVAL_MS = 5 * 60_000L
     const val SCALE_MIN = 0.6f
     const val SCALE_MAX = 3.5f
     const val SCALE_STEP = 0.1f
